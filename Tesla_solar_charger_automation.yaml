@@ -434,7 +434,7 @@ action:
             # Net power from all sources (default 0 set by float(0) if cannot convert to float).
             all_power_net: >-
               {% if states(homebattery_power_net) | float(0) > 0 %}
-                {{ states(grid_power_net) | float(0) + states(homebattery_power_net) | float(0) + (1 + skew_default) * one_amp_watt_step }}  
+                {{ states(grid_power_net) | float(0) - states(homebattery_power_net) | float(0) + (1 + skew_default) * one_amp_watt_step }}  
               {% else %}
                 {{ states(grid_power_net) | float(0) }} 
               {% endif %}
